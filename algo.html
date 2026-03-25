@@ -1,0 +1,1115 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nosso dia, my girl</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #2c0303 0%, #410135 50%, #0e0009 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* interface e cores */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(2px 2px at 20px 30px, #ff9a9e, transparent),
+                radial-gradient(2px 2px at 40px 70px, #fecfef, transparent),
+                radial-gradient(1px 1px at 90px 40px, #f8d7da, transparent),
+                radial-gradient(1px 1px at 130px 80px, #e2e3e5, transparent);
+            background-repeat: repeat;
+            background-size: 200px 100px;
+            animation: float 20s ease-in-out infinite;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.6;
+        }
+
+                /* 💖 CORAÇÕES ROMÂNTICOS FLUTUANDO NO FUNDO */
+        .hearts-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .heart-float {
+            position: absolute;
+            color: #ff9a9e;
+            font-size: clamp(12px, 2vw, 20px);
+            opacity: 0.4;
+            animation: heartFloat 15s linear infinite;
+            filter: drop-shadow(0 0 4px rgba(255, 154, 158, 0.6));
+        }
+
+        .heart-float:nth-child(1) { left: 10%; animation-delay: 0s; animation-duration: 18s; }
+        .heart-float:nth-child(2) { left: 20%; animation-delay: 2s; animation-duration: 22s; font-size: clamp(10px, 1.5vw, 16px); opacity: 0.3; }
+        .heart-float:nth-child(3) { left: 35%; animation-delay: 5s; animation-duration: 20s; }
+        .heart-float:nth-child(4) { left: 50%; animation-delay: 8s; animation-duration: 25s; font-size: clamp(14px, 2.2vw, 22px); opacity: 0.35; }
+        .heart-float:nth-child(5) { left: 65%; animation-delay: 11s; animation-duration: 19s; }
+        .heart-float:nth-child(6) { left: 80%; animation-delay: 14s; animation-duration: 23s; font-size: clamp(11px, 1.8vw, 18px); opacity: 0.25; }
+        .heart-float:nth-child(7) { left: 90%; animation-delay: 17s; animation-duration: 21s; }
+
+        @keyframes heartFloat {
+            0% {
+                transform: translateY(100vh) scale(0) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.4;
+                transform: translateY(90vh) scale(1) rotate(0deg);
+            }
+            90% {
+                opacity: 0.4;
+                transform: translateY(-10vh) scale(1.2) rotate(360deg);
+            }
+            100% {
+                transform: translateY(-20vh) scale(1.3) rotate(720deg);
+                opacity: 0;
+            }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+        }
+
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 60px 20px;
+            position: relative;
+            z-index: 1;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 400;
+            color: #4a5568;
+            margin-bottom: 20px;
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: #718096;
+            font-weight: 300;
+            max-width: 500px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        .mural {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 40px;
+            margin-top: 60px;
+        }
+
+        .memory {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(20px);
+            border-radius: 24px;
+            padding: 40px;
+            position: relative;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            overflow: hidden;
+        }
+
+        .memory::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #ff9a9e, #fecfef, #a8edea);
+        }
+
+        .memory:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.15);
+        }
+
+        /* espaço dos videos tlg */
+        .memory-video {
+            padding: 24px;
+        }
+
+        .video-container {
+            position: relative;
+            width: 100%;
+            height: 240px;
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            border-radius: 16px;
+            overflow: hidden;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+        }
+
+        .video-container video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 16px;
+            border: none;
+        }
+
+        /* 🖼️ NOVO ESTILO PARA IMAGEM */
+        .image-container {
+            position: relative;
+            width: 100%;
+            min-height: 340px;
+            background: linear-gradient(135deg, #b91d1d, #d71e1e);
+            border-radius: 16px;
+            overflow: hidden;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 24px rgba(70, 0, 0, 0.4);
+            border: 0;
+        }
+
+        .image-container img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            border-radius: 0;
+            transition: transform 0.3s ease;
+            background-color: transparent;
+        }
+
+        .memory:hover .image-container img {
+            transform: scale(1.02);
+        }
+
+        .image-placeholder {
+            font-size: 1.1rem;
+            color: #a0aec0;
+            text-align: center;
+            padding: 20px;
+        }
+
+        /* 🎵 ESTILO PARA SPOTIFY EXATO */
+        .spotify-container {
+            position: relative;
+            width: 100%;
+            height: 152px;
+            background: linear-gradient(135deg, #b91d1d, #d71e1e);
+            border-radius: 16px;
+            overflow: hidden;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 24px rgba(70, 0, 0, 0.4);
+        }
+
+        .spotify-container iframe {
+            width: 100%;
+            height: 100%;
+            border-radius: 12px;
+            border: none;
+        }
+
+        .memory-video .memory-title {
+            font-size: 1.4rem;
+            margin-bottom: 12px;
+        }
+
+        .memory-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            color: #2d3748;
+            margin-bottom: 16px;
+            font-weight: 400;
+        }
+
+        .memory-text {
+            color: #4a5568;
+            line-height: 1.7;
+            font-weight: 300;
+            font-size: 1rem;
+        }
+
+        .date {
+            font-size: 0.9rem;
+            color: #a0aec0;
+            margin-top: 20px;
+            font-style: italic;
+        }
+
+        .heart {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(135deg, #ff9a9e, #fecfef);
+            clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+            opacity: 0.7;
+            transition: transform 0.3s ease;
+        }
+
+        .memory:hover .heart {
+            transform: scale(1.1);
+        }
+
+        .final-message {
+            text-align: center;
+            margin-top: 80px;
+            padding: 60px 40px;
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(20px);
+            border-radius: 24px;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+        }
+
+        .final-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            color: #2d3748;
+            margin-bottom: 20px;
+        }
+
+        .final-text {
+            font-size: 1.1rem;
+            color: #4a5568;
+            line-height: 1.8;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        @media (max-width: 768px) {
+            .mural {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            
+            .container {
+                padding: 40px 20px;
+            }
+            
+            .memory, .memory-video {
+                padding: 30px 24px;
+            }
+            
+            .video-container, .image-container {
+                height: 220px;
+            }
+            
+            .spotify-container {
+                height: 140px;
+            }
+        }
+
+                /* 🔥 NOVA FONTE ROMÂNTICA PARA OS MOTIVOS */
+        .reasons-list {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+            color: #2d3748;
+            line-height: 1.6;
+            font-weight: 400;
+            font-style: italic;
+            list-style: none;
+            margin: 20px 0;
+            padding-left: 0;
+        }
+
+        .reasons-list li {
+            position: relative;
+            padding: 12px 0 12px 30px;
+            margin-bottom: 8px;
+            background: linear-gradient(135deg, rgba(255, 154, 158, 0.1), rgba(254, 207, 239, 0.1));
+            border-left: 4px solid #ff9a9e;
+            border-radius: 0 8px 8px 0;
+            transition: all 0.3s ease;
+        }
+
+        .reasons-list li::before {
+            content: '💕 ';
+            position: absolute;
+            left: 8px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1rem;
+        }
+
+        .reasons-list li:hover {
+            background: linear-gradient(135deg, rgba(255, 154, 158, 0.2), rgba(254, 207, 239, 0.2));
+            transform: translateX(5px);
+            box-shadow: 0 4px 12px rgba(255, 154, 158, 0.2);
+        }
+
+        /* 💕 ESTILO PARA OS 20 CONTAINERS DOS MOTIVOS */
+        .reasons-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 20px;
+            margin: 60px auto;
+            max-width: 1000px;
+            padding: 40px 20px;
+        }
+
+        .reason-card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 24px;
+            position: relative;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            border: 2px solid rgba(255, 154, 158, 0.3);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            text-align: center;
+            min-height: 160px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .reason-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #ff9a9e, #fecfef);
+            border-radius: 20px 20px 0 0;
+        }
+
+        .reason-card:hover {
+            transform: translateY(-10px) scale(1.05);
+            box-shadow: 0 25px 50px rgba(255, 154, 158, 0.3);
+            background: rgba(255, 255, 255, 0.95);
+        }
+
+        .reason-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            color: #ff9a9e;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .reason-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1rem;
+            color: #2d3748;
+            font-weight: 400;
+            margin-bottom: 12px;
+            line-height: 1.3;
+        }
+
+        .reason-description {
+            font-size: 0.85rem;
+            color: #4a5568;
+            line-height: 1.4;
+            font-weight: 300;
+            font-style: italic;
+            border-top: 1px solid rgba(255, 154, 158, 0.2);
+            padding-top: 10px;
+            margin-top: 10px;
+        }
+
+        .reason-emoji {
+            font-size: 1.8rem;
+            margin-bottom: 8px;
+        }
+
+        @media (max-width: 768px) {
+            .reasons-container {
+                grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+                gap: 15px;
+                padding: 30px 15px;
+            }
+
+            .reason-card {
+                padding: 18px;
+                min-height: 150px;
+            }
+
+            .reason-number {
+                font-size: 1.6rem;
+            }
+
+            .reason-title {
+                font-size: 0.9rem;
+            }
+
+            .reason-description {
+                font-size: 0.75rem;
+            }
+        }
+
+        /* Animação de entrada */
+        .memory, .memory-video {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        .memory:nth-child(1), .memory-video:nth-child(1) { animation-delay: 0.1s; }
+        .memory:nth-child(2), .memory-video:nth-child(2) { animation-delay: 0.2s; }
+        .memory:nth-child(3), .memory-video:nth-child(3) { animation-delay: 0.3s; }
+        .memory:nth-child(4), .memory-video:nth-child(4) { animation-delay: 0.4s; }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* 🖤 CORAÇÕES PRETOS ANIMADOS */
+        .black-hearts-container {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 40px;
+            height: 60px;
+            align-items: center;
+        }
+
+        .black-heart {
+            width: 40px;
+            height: 40px;
+            position: relative;
+            animation: heartBeat 1.2s ease-in-out infinite;
+        }
+
+        .black-heart::before,
+        .black-heart::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            width: 40px;
+            height: 65px;
+            background: #1a1a1a;
+            border-radius: 40px 40px 0 0;
+        }
+
+        .black-heart::before {
+            left: -20px;
+            transform: rotate(-45deg);
+            transform-origin: 0 100%;
+        }
+
+        .black-heart::after {
+            left: 0;
+            transform: rotate(45deg);
+            transform-origin: 100% 100%;
+        }
+
+        .black-heart:nth-child(1) { animation-delay: 0s; }
+        .black-heart:nth-child(2) { animation-delay: 0.2s; }
+        .black-heart:nth-child(3) { animation-delay: 0.4s; }
+        .black-heart:nth-child(4) { animation-delay: 0.6s; }
+        .black-heart:nth-child(5) { animation-delay: 0.8s; }
+
+        @keyframes heartBeat {
+            0%, 100% {
+                transform: scale(1);
+            }
+            25% {
+                transform: scale(1.1);
+            }
+            50% {
+                transform: scale(1.2);
+            }
+            75% {
+                transform: scale(1.1);
+            }
+        }
+
+        /* 🖤 CORAÇÕES EM LINHAS VERTICAIS */
+        .vertical-hearts-container {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 30px;
+            min-height: 120px;
+        }
+
+        .hearts-column {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .hearts-column .black-heart {
+            animation: heartBeat 1.2s ease-in-out infinite;
+        }
+
+        .hearts-column .black-heart:nth-child(1) { animation-delay: 0s; }
+        .hearts-column .black-heart:nth-child(2) { animation-delay: 0.2s; }
+        .hearts-column .black-heart:nth-child(3) { animation-delay: 0.4s; }
+
+        /* 💗 CORAÇÕES FORMADOS COM "I LOVE YOU" */
+        .love-you-hearts {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .love-heart-text {
+            position: absolute;
+            font-family: 'Inter', sans-serif;
+            font-size: 12px;
+            font-weight: 600;
+            color: #ff9a9e;
+            opacity: 0.5;
+            animation: floatAround 25s linear infinite;
+            letter-spacing: 2px;
+            text-shadow: 0 0 8px rgba(255, 154, 158, 0.4);
+        }
+
+        .love-heart-text:nth-child(1) { left: 5%; top: 10%; animation-delay: 0s; }
+        .love-heart-text:nth-child(2) { left: 85%; top: 15%; animation-delay: 2s; }
+        .love-heart-text:nth-child(3) { left: 50%; top: 30%; animation-delay: 4s; }
+        .love-heart-text:nth-child(4) { left: 10%; top: 50%; animation-delay: 6s; }
+        .love-heart-text:nth-child(5) { left: 80%; top: 60%; animation-delay: 8s; }
+        .love-heart-text:nth-child(6) { left: 20%; top: 75%; animation-delay: 10s; }
+        .love-heart-text:nth-child(7) { left: 75%; top: 80%; animation-delay: 12s; }
+        .love-heart-text:nth-child(8) { left: 40%; top: 90%; animation-delay: 14s; }
+
+        @keyframes floatAround {
+            0% {
+                transform: translateY(0) scale(1) rotate(0deg);
+                opacity: 0.5;
+            }
+            25% {
+                transform: translateY(-30px) scale(1.05) rotate(10deg);
+            }
+            50% {
+                transform: translateY(20px) scale(0.95) rotate(-5deg);
+                opacity: 0.6;
+            }
+            75% {
+                transform: translateY(-10px) scale(1.02) rotate(8deg);
+            }
+            100% {
+                transform: translateY(0) scale(1) rotate(0deg);
+                opacity: 0.5;
+            }
+        }
+    </style>
+</head>
+<body>
+        <!-- 💖 CAMADA DOS CORAÇÕES FLUTUANTES -->
+    <div class="hearts-bg">
+        <div class="heart-float">💖</div>
+        <div class="heart-float">💕</div>
+        <div class="heart-float">💗</div>
+        <div class="heart-float">💖</div>
+        <div class="heart-float">💕</div>
+        <div class="heart-float">💗</div>
+        <div class="heart-float">💖</div>
+    </div>
+
+    <!-- 💗 CORAÇÕES COM "I LOVE YOU" -->
+    <div class="love-you-hearts">
+        <div class="love-heart-text">I LOVE YOU</div>
+        <div class="love-heart-text">I LOVE YOU</div>
+        <div class="love-heart-text">I LOVE YOU</div>
+        <div class="love-heart-text">I LOVE YOU</div>
+        <div class="love-heart-text">I LOVE YOU</div>
+        <div class="love-heart-text">I LOVE YOU</div>
+        <div class="love-heart-text">I LOVE YOU</div>
+        <div class="love-heart-text">I LOVE YOU</div>
+    </div>
+
+    <div class="container">
+        <div class="header">
+            <h1 class="title">Nosso dia 27 💖</h1>
+            <p class="subtitle">Hoje é o nosso dia, e eu não poderia deixar de dizer e demonstrar o quanto sou sortudo por ter você na minha vida princesa, sou seu maior fã.</p>
+        </div>
+
+        <div class="mural">
+            <!-- 🎥 VÍDEO "linda.mp4" do meu amorzinho -->
+            <div class="memory memory-video">
+                <div class="heart"></div>
+                <div class="video-container">
+                    <video 
+                        loop 
+                        autoplay 
+                        muted 
+                        playsinline 
+                        webkit-playsinline>
+                        <source src="linda.mp4" type="video/mp4">
+                        Seu navegador não suporta vídeo.
+                    </video>
+                </div>
+                <h3 class="memory-title">Você é extremamente maravilhosa</h3>
+                <p class="memory-text">
+                    Não cansaria nunca de me perder na infinidade dos seus lindos olhos castanhos. Você tem a incrível capacidade de me desmontar por completo com um simples olhar, um sorriso. 
+                    Amo cada partícula do seu ser, cada átomo. Poderia apreciar seu sorriso único pelo restante da minha vida e nunca me cansaria.
+                    Você é mais que bela, a cada vez que eu vejo seu rostinho lindo PERFEITO eu me apaixono mais e mais, te olhar é como deitar na grama e admirar um lindo
+                    dia de pôr do sol, daqueles bem lindos, é como olhar uma noite de lua cheia e se encantar com todo seu brilho, é dessa forma que te olhar soa pra mim, eu amo você. ❤️
+                </p>
+                <div class="date">Minha princesa</div>
+            </div>
+
+            <!-- 🎵 BRUNO MARS - Just The Way You Are -->
+            <div class="memory memory-video">
+                <div class="heart"></div>
+                <div class="spotify-container">
+                    <iframe style="border-radius:12px" 
+                            src="https://open.spotify.com/embed/track/47Slg6LuqLaX0VodpSCvPt?utm_source=generator" 
+                            width="100%" 
+                            height="152" 
+                            frameborder="0" 
+                            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
+                            loading="lazy">
+                    </iframe>
+                </div>
+                <h3 class="memory-title">A forma como eu te enxergo ✨</h3>
+                <p class="memory-text">
+                    "Oh, her eyes, her eyes". 
+                    "Make the stars look like they're not shinin".
+                    Como o próprio nome da música já diz, eu amo você "Just the way you are". Você é tão linda meu amor, queria que você pudesse
+                    se enxergar da mesma como eu te vejo, você é absurdamente maravilhosa, não há nada que mudaria, porquê todos seus detalhes já são mais do que perfeitos.
+                    Você é a garota mais linda que existe nesse universo, eu sou o homem mais sortudo do mundo por ter você como minha namorada. escuta a música mozinho, ela fala por si só.
+                </p>
+                <div class="date">i love you</div>
+            </div>
+
+            <!-- 🎵 ANAVITÓRIA - Lisboa (ANTIGA "Noites de conversa") -->
+            <div class="memory memory-video">
+                <div class="heart"></div>
+                <div class="spotify-container">
+                    <iframe style="border-radius:12px" 
+                            src="https://open.spotify.com/embed/track/2o2xhyri4aJUtgMGkf5P0J?utm_source=generator&theme=0" 
+                            width="100%" 
+                            height="152" 
+                            frameborder="0" 
+                            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
+                            loading="lazy">
+                    </iframe>
+                </div>
+                <h3 class="memory-title">As noites de conversa </h3>
+                <p class="memory-text">
+                    A tranquilidade dessa música me remetem as noites de conversa contigo. As horas que passam voando quando estamos juntos falando sobre tudo e nada. 
+                    As nossas bobagens tão únicas, entramos em assuntos tão aleatórios e rimos igual idiotas kkkkk, e só Deus sabe como meu coração PULA de alegria ao escutar
+                    sua risada doce e gostosa. Sua voz suave de sono é o meu som favorito, me leva pra longe, pra um lugar onde jamais fui antes.
+                    "Eu te queria a vida toda, te confesso". Eu escuto essa música e lembro de você sempre, sempre pensando no nosso amor leve e calmo e na forma como você ecoa
+                    na minha mente, me fazendo se sentir apenas uma criança pura novamente.
+                </p>
+                <div class="date">Nossas noites</div>
+            </div>
+
+                        <!-- 🎵 LUAN SANTANA - Promete -->
+            <div class="memory memory-video">
+                <div class="heart"></div>
+                <div class="spotify-container">
+                    <iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/track/0fi1wKZ80pjUgPguOnDBBa?utm_source=generator&theme=0" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+                </div>
+                <h3 class="memory-title">Músiquinha que me faz pensar em você</h3>
+                <p class="memory-text">
+                    "É impressão minha ou o sol brilhou mais forte quando olhou pra mim? É impressão minha ou metade do meu peito mora em você?"
+                    "Promete ler meus pensamentos? Decifrar o meu coração? Porque só assim vai saber, que a minha vida inteira está em suas mãos."
+                    Essa é outra música que me lembra você, tens minha vida inteira em suas mãos Beatriz, eu prometo pra sempre ler os seus pensamentos e decifrar
+                    o seu coração, prometo pra sempre ser o seu porto seguro e o seu homem. você é o amor da minha vida.
+                </p>
+                <div class="date">Minha promessa eterna</div>
+            </div>
+                        <!-- NOVO VÍDEO - ADICIONE SEU VÍDEO AQUI -->
+            <div class="memory memory-video">
+                <div class="heart"></div>
+                <div class="video-container">
+                    <!-- COLE SEU VÍDEO AQUI - SUBSTITUA "SEU_VIDEO.mp4" -->
+                    <video 
+                        loop 
+                        autoplay 
+                        muted 
+                        playsinline 
+                        webkit-playsinline>
+                        <source src="meu amo.mp4" type="video/mp4">
+                        Seu navegador não suporta vídeo.
+                    </video>
+                </div>
+                <h3 class="memory-title">Coisas que eu amo em você</h3>
+                <ul class="reasons-list">
+                    <!-- ADICIONE SEUS MOTIVOS AQUI -->
+                    <li>1: Seus olhos</li>
+                    <li>2: Seu cabelo</li>
+                    <li>3: Seu sorriso</li>
+                    <li>4: Sua gargalhada</li>
+                    <li>5: Seu humor ácido</li>
+                    <li>6: Sua boca</li>
+                    <li>7: Sua voz</li>
+                    <li>8: Sua personalidade</li>
+                    <li>9: Sua forma de demonstrar amor</li>
+                    <li>10: Seu jeito protetora</li>
+                    <li>11: Sua bunda gostosa</li>
+                    <li>12: Seu corpo delicioso</li>
+                    <li>13: Sua atenção</li>
+                    <li>14: Sua companhia</li>
+                    <li>15: Seu ciúmes</li>
+                    <li>16: Sua beleza</li>
+                    <li>17: Sua respiração</li>
+                    <li>18: Como faz eu me sentir único</li>
+                    <li>19: Sua safadeza</li>
+                    <li>20: TUDO TUDO TUDO!!!!</li>
+                    <!-- ADICIONE MAIS LI's CONFORME NECESSÁRIO -->
+                </ul>
+                <div class="date">Por todos esses motivos e infinitos mais</div>
+            </div>
+
+            <!-- 🖼️ ESPAÇO PARA IMAGEM -->
+            <div class="memory memory-video">
+                <div class="heart"></div>
+                <div class="image-container" style="background: transparent; border: none; min-height: auto;">
+                    <!-- SUBSTITUA "sua-imagem.jpg" pelo nome do seu arquivo de imagem -->
+                    <img src="heartopia.jpg" alt="Nosso momento especial" style="width: 100%; height: 100%; object-fit: cover; border-radius: 0;" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
+                    <div class="image-placeholder" style="display: none;">
+                        📸 Coloque sua imagem aqui<br>
+                        <small>(substitua "sua-imagem.jpg")</small>
+                    </div>
+                </div>
+                <h3 class="memory-title">Nossos momentos juntos</h3>
+                <p class="memory-text">
+                    Meus momentos com você são aquilo que eu posso dizer que me salvam todos os dias, mesmo que façamos a coisa mais BOBA do mundo desde que façamos juntos é aquilo que vai
+                    me fazer mais feliz do mundo amor kkkkkkkk. Eu acho incrível nossa capacidade de sermos besta e rirmos com coisas nada a ver, como quando prendemos CRIANÇAS no heartopia e ficamos
+                    rachando o bico sozinhos isso é inacreditável, ou quando ficamos brisadinhos pescando ou fazendo roupinha, e quando somos péssimos cozinheiros no overcoocked? ficamos rindo atoa jogando
+                    comida um no outro e se batendo se jogando na água, ou pior ainda quando pegamos hiperfoco em alguma coisa e não paramos de rir disso por horas. E jogando repo então?
+                    você se segurando pra não rir e me fazendo morrer, é tão satisfatório jogar isso contigo amor adoro ver você focadinha pegando as coisas e quebrando tudokkkkk. Sabe o que mais eu amo também?
+                    é quando não podemos fazer um barulho que seja por estarmos em call com outras pessoas e ficamos nos provocando, jogar de pau duro e com uma puta vontade de te comer é díficil ein af, sabe direitinho
+                    como me ganhar até pelo pau, me manda foto toda gostosa e só me deixa no desejo de te sentir. putarias a parte, todos momentos com minha mulher são tão únicos, me divirto tanto
+                    até em joguinhos de roblox amo ver você felizinha e construir nosso restaurante juntos. (acho que só falta você jogar valorant comigo 😭) Nossos momentos assistindo também são ótimos, nunca me esqueço dos nossos
+                    surtos de risadas no meio do nada com besteiras, "é o osama bin laden", o "CHEGUEEI, VAI EMBORAAA" que crise de riso do caralho que me dá só de lembrar disso kkkkkkkkk que filme bom esse descendentes e que gostoso que é assistir com você.
+                    Colocando a foto do heartopia aqui porquê achei muito fofo (Quem diria né, eu jogando heartopia e achando fofo).
+                    E porquê infelizmente AINDA não posso colocar nossas fotos juntos e gravar nossos momentinhos, mas prometo que ainda vamos viver muitos momentos únicos juntos pelo mundo todo.
+                </p>
+                <div class="date">Momentinhos de amor</div>
+            </div>
+        </div>
+
+        <!-- 💕 TÍTULO INTERMEDIÁRIO -->
+        <div class="why-container" style="max-width: 360px; margin: 40px auto 24px; padding: 16px 12px; text-align: center; border: 2px solid #ffb6c1; border-radius: 12px; background: #fff9fb; box-shadow: 0 4px 12px rgba(214, 51, 108, 0.15);">
+            <h2 style="margin: 0; font-size: 1.8rem; color: #d6336c; font-family: 'Brush Script MT', 'Lucida Handwriting', cursive; text-transform: uppercase; letter-spacing: 0.08em;">Por que amo cada detalhe seu?</h2>
+        </div>
+
+        <!-- 💕 SEÇÃO DOS 20 MOTIVOS ESPECIAIS -->
+        <div class="reasons-container">
+            <div class="reason-card">
+                <div class="reason-emoji"></div>
+                <div class="reason-number">1</div>
+                <div class="reason-title">Seus olhos</div>
+                <div class="reason-description">Amo a cor escura dos seus lindos olhos, sua pupila dilatada, fascinam meu coração, uma encarada sua me desmonta inteiro.</div>
+            </div>
+
+            <div class="reason-card">
+                <div class="reason-emoji"></div>
+                <div class="reason-number">2</div>
+                <div class="reason-title">Seu cabelo</div>
+                <div class="reason-description">É o que mais chama atenção em você toda. É o complemento que se encaixa perfeitamente com seu rostinho, o vento batendo no seu cabelo me deixa tão aaaaaa...</div>
+            </div>
+
+            <div class="reason-card">
+                <div class="reason-emoji"></div>
+                <div class="reason-number">3</div>
+                <div class="reason-title">Seu sorriso</div>
+                <div class="reason-description">É onde reflete sua beleza da forma mais genuína, onde vejo sua felicidade, seu sorriso é tão brilhante. </div>
+            </div>
+
+            <div class="reason-card">
+                <div class="reason-emoji"></div>
+                <div class="reason-number">4</div>
+                <div class="reason-title">Sua gargalhada</div>
+                <div class="reason-description">Não tem nada que eu ame mais no mundo do que escutar sua felicidade gargalhando, é onde eu me perco e me encontro.</div>
+            </div>
+
+            <div class="reason-card">
+                <div class="reason-emoji"></div>
+                <div class="reason-number">5</div>
+                <div class="reason-title">Seu humor ácido</div>
+                <div class="reason-description">Autoexplicativo né amor? ri de cada coisa doentinha, o algoritmo do seu tiktok diz isso por si só kkkk e eu ainda do risada junto, amo isso.</div>
+            </div>
+
+            <div class="reason-card">
+                <div class="reason-emoji"></div>
+                <div class="reason-number">6</div>
+                <div class="reason-title">Sua boca</div>
+                <div class="reason-description">Sua boca é perfeitamente desenhada, gostosa de forma natural, eu amo tanto sua boca poderia beijar ela pelo resto da minha vida.</div>
+            </div>
+
+            <div class="reason-card">
+                <div class="reason-emoji"></div>
+                <div class="reason-number">7</div>
+                <div class="reason-title">Sua voz</div>
+                <div class="reason-description">Sua voz é doce de se escutar e entra na minha alma como a mais bela canção, e quando você faz aquela voz manhosa que pode conseguir o que quiser de mim. </div>
+            </div>
+
+            <div class="reason-card">
+                <div class="reason-emoji"></div>
+                <div class="reason-number">8</div>
+                <div class="reason-title">Sua personalidade</div>
+                <div class="reason-description">Sua personalidade forte te faz única, você é totalmente diferente de qualquer pessoa que eu já conheci. Você se importa com quem ama, é a mulher mais doce e forte que existe.</div>
+            </div>
+
+            <div class="reason-card">
+                <div class="reason-emoji"></div>
+                <div class="reason-number">9</div>
+                <div class="reason-title">Sua forma de amar</div>
+                <div class="reason-description">Você faz eu me sentir amado como eu sempre pedi a Deus, me sinto amado em voz alta, me faz sentir SEU namorado, eu amo como você faz eu me sentir.</div>
+            </div>
+
+            <div class="reason-card">
+                <div class="reason-emoji"></div>
+                <div class="reason-number">10</div>
+                <div class="reason-title">Seu jeito protetora</div>
+                <div class="reason-description">Seu jeitinho de se preocupar comigo quando estou doente, quando quer que eu faça a coisa certa, você pensa em mim e cuida de mim.</div>
+            </div>
+
+            <div class="reason-card">
+                <div class="reason-emoji"></div>
+                <div class="reason-number">11</div>
+                <div class="reason-title">Sua bunda</div>
+                <div class="reason-description">Sua bunda é a coisa mais gostosa que existe, eu fico LOUCO sou APAIXONADO nessa delícia de bunda que eu poderia morar dentro, gostosa filha da puta.</div>
+            </div>
+
+            <div class="reason-card">
+                <div class="reason-emoji"></div>
+                <div class="reason-number">12</div>
+                <div class="reason-title">Seu corpo</div>
+                <div class="reason-description">Seu corpo é uma total obra de arte, sinto tesão na mesma medida que admiro todos seus detalhes, sua cintura que me deixa hipnotizado, beijaria seu corpo todo pela eternidade minha deusa. </div>
+            </div>
+
+            <div class="reason-card">
+                <div class="reason-emoji"></div>
+                <div class="reason-number">13</div>
+                <div class="reason-title">Sua atenção</div>
+                <div class="reason-description">Você é atenciosa comigo, se preocupa com meu bem estar e sempre faz questão de me incluir no seu dia, é com certeza uma das coisas que mais amo em ti.</div>
+            </div>
+
+            <div class="reason-card">
+                <div class="reason-emoji"></div>
+                <div class="reason-number">14</div>
+                <div class="reason-title">Sua companhia</div>
+                <div class="reason-description">Estar com você é estar em paz, sua companhia é minha felicidade, é como estar nas nuvens, é uma leve brisa da manhã, você me tranquiliza.</div>
+            </div>
+
+            <div class="reason-card">
+                <div class="reason-emoji"></div>
+                <div class="reason-number">15</div>
+                <div class="reason-title">Seu ciúmes</div>
+                <div class="reason-description">Seu ciúmes por mim faz eu me sentir único e desejado, um sentimento de que eu sou seu, amo me sentir dessa forma. Amo ser seu.</div>
+            </div>
+
+            <div class="reason-card">
+                <div class="reason-emoji"></div>
+                <div class="reason-number">16</div>
+                <div class="reason-title">Sua beleza</div>
+                <div class="reason-description">Que absurdo de mulher que é você Beatriz, chega ser injusto com a humanidade essa deusa que é você coexistir no mesmo lugar que seres comuns, você é uma DEUSA LINDA, sua beleza transcende tudo que existe.</div>
+            </div>
+
+            <div class="reason-card">
+                <div class="reason-emoji"></div>
+                <div class="reason-number">17</div>
+                <div class="reason-title">Sua respiração</div>
+                <div class="reason-description">Almejo pelo dia que vou ter você respirando do meu ladinho, sua respiração entra no profundo do meu ser e me deixa louco, feliz, calmo.</div>
+            </div>
+
+            <div class="reason-card">
+                <div class="reason-emoji"></div>
+                <div class="reason-number">18</div>
+                <div class="reason-title">Me sinto único</div>
+                <div class="reason-description">Você faz QUESTÃO de me ouvir e me fazer sentir especial sempre, me escuta e não invalida o que eu sinto, eu AMO muito esse detalhe em ti, sempre me dizendo o que vai fazer, me passando confiança e tranquilidade.</div>
+            </div>
+
+            <div class="reason-card">
+                <div class="reason-emoji"></div>
+                <div class="reason-number">19</div>
+                <div class="reason-title">Sua safadeza</div>
+                <div class="reason-description">Seu lado de safada dizendo o quanto me quer dentro de você, imagino tantas coisas com você, eu desejo TANTO você que nem faz idéia, desejo te sentir, te tocar, te possuir.</div>
+            </div>
+
+            <div class="reason-card">
+                <div class="reason-emoji"></div>
+                <div class="reason-number">20</div>
+                <div class="reason-title">TUDO EM VOCÊ!</div>
+                <div class="reason-description">Você todinha é a junção de tudo que é perfeito nesse mundo, eu amo te amar, amo você completamente por dentro e por fora, tudo em ti é lindo meu amor. Te amo além dessa vida!! 💕</div>
+            </div>
+        </div>
+
+        <!-- ✨ CONTAINERS EXTRA (IGUAIS AO PADRÃO) -->
+        <div class="mural">
+            <div class="memory memory-video">
+                <div class="heart"></div>
+                <div class="image-container">
+                    <!-- Substitua esta imagem pelo seu arquivo -->
+                    <img src="olhos.jpg" alt="Sua foto especial" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
+                    <div class="image-placeholder" style="display: none;">
+                        📸 Adicione sua foto aqui (substitua "sua-foto.jpg")
+                    </div>
+                </div>
+                <div class="spotify-container" style="margin-top: 8px;">
+                    <iframe data-testid="embed-iframe" style="border-radius:12px"
+                            src="https://open.spotify.com/embed/track/4SpqtLElDsO6KGbd4ub96Z?utm_source=generator"
+                            width="100%"
+                            height="152"
+                            frameBorder="0"
+                            allowfullscreen=""
+                            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                            loading="lazy">
+                    </iframe>
+                </div>
+                <h3 class="memory-title">Pela luz dos olhos teus</h3>
+                <p class="memory-text">"Que frio que me da o encontro desse olhar". Me sinto incendiar podendo ver esses seus olhos maravilhosos que carregam tantas expressões com um simples olhar, você me devora com seu olhar, sua piscadinha consegue me levar pra outra dimensão, você sorri com seus lindos olhinhos e eu me perco. Seus olhos são o caminho para o paraíso amor, são tão brilhantes, iluminam minha vida.</p>
+                <div class="date">Seus olhos me salvam</div>
+            </div>
+
+            <div class="memory memory-video">
+                <div class="heart"></div>
+                <div class="spotify-container">
+                    <iframe data-testid="embed-iframe" style="border-radius:12px"
+                            src="https://open.spotify.com/embed/track/2kfGoV9a5dbSKCNmUWH2ZF?utm_source=generator&theme=0"
+                            width="100%"
+                            height="152"
+                            frameBorder="0"
+                            allowfullscreen=""
+                            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                            loading="lazy">
+                    </iframe>
+                </div>
+                <h3 class="memory-title">Nossa intensidade</h3>
+                <p class="memory-text">Essa música chega bem perto de descrever toda a intensidade do meu amor por ti. "Eu esperei cem anos, mas esperaria mais um milhão por você, nada me preparou para que o privilégio de ser seu faria". O seu amor é a virada de página da minha vida. "É uma coisa
+                    extraordinária quando conhecemos alguém com quem podemos dividir a nossa alma" e com você Beatriz, eu quero dividir o resto da minha vida, eu quero você como a mãe dos meus filhos, você é tudo pra mim e eu quero ser tudo pra você. Eu te amo da forma mais genuína, inocente e pura possível.
+                    Eu sou desesperadamente louco por você.
+                </p>
+                <div class="date">Esperaria a eternidade só pra te encontrar.</div>
+            </div>
+
+            <!-- ✨ NOVOS CONTAINERS EXTRA -->
+            <div class="memory memory-video">
+                <div class="heart"></div>
+                <div class="image-container">
+                    <!-- Substitua esta imagem pelo seu arquivo -->
+                    <img src="estrelas.png" alt="Sua nova foto especial" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
+                    <div class="image-placeholder" style="display: none;">
+                        
+                    </div>
+                </div>
+                <h3 class="memory-title">A constelação e as estrelas</h3>
+                <p class="memory-text">Pensei em fazer isso, em ver como estava o céu e as estrelas no dia que começamos a namorar pra fazer disso um novo significado pra gente. Porque como eu já disse pra você antes
+                    amor, a distância nunca será nada entre a gente e você nunca estará sozinha. Porque diante de toda imensidão desse universo, não importa o quão longe estejamos, sempre estaremos debaixo do mesmo céu.
+                    e sempre que se sentir sozinha, olhe para a lua e as estrelas e feche os olhos, pense em mim, eu estarei fazendo a mesma coisa e te abraçando e pensando em você com todo meu amor. você é o meu céu, minha lua e todas estrelas que brilham nele.
+                </p>
+                <div class="date">O céu quando começamos a namorar</div>
+            </div>
+
+            <div class="memory memory-video">
+                <div class="heart"></div>
+                <div class="spotify-container">
+                    <iframe data-testid="embed-iframe" style="border-radius:12px"
+                            src="https://open.spotify.com/embed/track/1mSxbLW7fKABfeY4lGpg0E?utm_source=generator&theme=0"
+                            width="100%"
+                            height="152"
+                            frameBorder="0"
+                            allowfullscreen=""
+                            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                            loading="lazy">
+                    </iframe>
+                </div>
+                <h3 class="memory-title">Um sonho pra mim</h3>
+                <p class="memory-text">Roubando aqui a música que você mandou pra mim bobona kkkkkkkk. Acho que não tem música melhor pra remeter a leveza que é namorar você, nos faz pensar um no outro, é nossa música em cada trecho dela.
+                    "Seus olhos, meu clarão, me guiam dentro da escuridão". Você é um SONHO pra mim e sempre foi, você é minha paixão e minha fonte de luz meu amor, meu riso é tão feliz contigo. "Quero te encher de beijos, eu penso em você, desde o amanhecer até quando eu me deito".
+                    É tão gostoso escutar todas músicas de amor pensando em ti, você realmente trouxe um significado novo pra minha vida princesa.
+                </p>
+                <div class="date">Velha Infância</div>
+                <div class="vertical-hearts-container">
+                    <div class="hearts-column">
+                        <div class="black-heart"></div>
+                        <div class="black-heart"></div>
+                        <div class="black-heart"></div>
+                    </div>
+                    <div class="hearts-column">
+                        <div class="black-heart"></div>
+                        <div class="black-heart"></div>
+                        <div class="black-heart"></div>
+                    </div>
+                    <div class="hearts-column">
+                        <div class="black-heart"></div>
+                        <div class="black-heart"></div>
+                        <div class="black-heart"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="final-message">
+            <div class="black-hearts-container">
+                <div class="black-heart"></div>
+                <div class="black-heart"></div>
+                <div class="black-heart"></div>
+                <div class="black-heart"></div>
+                <div class="black-heart"></div>
+            </div>
+            <h2 class="final-title">Você é o meu lar</h2>
+            <p class="final-text">
+                Você é minha morada favorita amor, é a minha sina ao sentido mais literal da palavra. És o meu caso do acaso mais lindo. Nós somos o que eu posso chamar de sorte inevitável, meu destino 
+                seria te encontrar Beatriz, não importa se em meses, anos, ou em outras vidas e universos, eu te buscaria e te amaria em cada um desses universos. Já disse milhares de vezes que acredito em destino e eu tenho
+                certeza de que você é o meu destino, acredito firmemente que todos os momentos das nossas vidas nos trouxeram até aqui, e que sorte a nossa. sou feliz demais por viver exatamente no mesmo tempo que você, junto de você
+                e ter a chance de poder te amar com todo meu coração. desde que você disse "sim" pra mim, todo dia 27 tem um novo significado e é o dia mais importante pra mim, você é o meu amor. Acontecemos de forma natural, por mais que
+                nem imaginassemos de ínicio chegar aonde estamos hoje kkkk eu era só seu "amigo" e nunca nos imaginamos tão apaixonados assim um pelo outro, mas que sorte a nossa que o amor nos escolheu, nos escolhemos, e desde
+                então a vida tem tido um significado totalmente diferente pra mim, eu quero viver por ti, por nós, todos meus dias tem sido melhores e mais lindos com você princesa.
+                acontecemos tão desprentesiosamente, e óbvio que seria apenas questão de tempo até me apaixonar completamente por você, alias, como não me apaixonaria? você me alucina. hoje completamos 1 mês juntos mas estamos
+                apenas no começo da nossa trajetória, preciso de uma vida inteira ao seu lado, e ainda sim seria pouco, todo tempo do mundo ainda seria pouco demais pra demonstrar, pouco
+                demais pra te amar com toda profundidade e intensidade que o nosso amor merece. Nenhum espaço de tempo no universo com você seria suficiente.
+            </p>
+        </div>
+    </div>
+</body>
+</html>
